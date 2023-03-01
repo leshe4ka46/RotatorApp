@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.leshe4ka.rotator.databinding.FragmentFirstBinding
-import com.leshe4ka.rotator.sendangles
+import com.leshe4ka.rotator.databinding.DataSetBinding
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -19,9 +18,9 @@ fun vailid(str:String): Boolean {
     }
     return false
 }
-class FirstFragment : Fragment() {
+class DataSet : Fragment() {
 
-private var _binding: FragmentFirstBinding? = null
+private var _binding: DataSetBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -31,7 +30,7 @@ private var _binding: FragmentFirstBinding? = null
         savedInstanceState: Bundle?
     ): View? {
 
-      _binding = FragmentFirstBinding.inflate(inflater, container, false)
+      _binding = DataSetBinding.inflate(inflater, container, false)
       return binding.root
 
     }
@@ -40,22 +39,26 @@ private var _binding: FragmentFirstBinding? = null
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_dataset_to_SecondFragment)
         }
+        binding.editTextAzimuth.setText("0");
+        binding.editTextElevation.setText("0");
         binding.sendAngles.setOnClickListener { view
             if (vailid(binding.editTextAzimuth.text.toString()) && vailid(binding.editTextElevation.text.toString())) {
+                binding.textViewAzimuth.setText(binding.editTextAzimuth.text.toString())
+                binding.textViewElevation.setText(binding.editTextElevation.text.toString())
                 sendangles(
                     binding.editTextAzimuth.text.toString(),
                     binding.editTextElevation.text.toString()
                 )
-                Snackbar.make(view,"Отправлено:" + binding.editTextAzimuth.text.toString() + " " + binding.editTextElevation.text.toString(),Snackbar.LENGTH_LONG)
-                    .setAnchorView(R.id.sendAngles)
+                Snackbar.make(view,"Отправлено: " + binding.editTextAzimuth.text.toString() + " " + binding.editTextElevation.text.toString(),Snackbar.LENGTH_LONG)
+                    //.setAnchorView(R.id.toolbar)
                     .setAction("Закрыть", { }).show()
             }
             else{
                 Snackbar.make(
                     view,"Надо хоть что-то написать", Snackbar.LENGTH_LONG)
-                    .setAnchorView(R.id.sendAngles)
+                    //.setAnchorView(R.id.fab)
                     .setAction("Закрыть", { }).show()
             }
         }

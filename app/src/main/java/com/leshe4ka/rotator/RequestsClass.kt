@@ -50,7 +50,7 @@ object ServiceBuilder {
     private val client = OkHttpClient.Builder().build()
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.1.60/") //
+        .baseUrl("http://192.168.1.128/") //
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()
@@ -133,7 +133,7 @@ fun sendangles(azimut: String?,elevation: String?): String? {
     val json = jsonObject.toString()*/
     //Log.i("ROTATORLOG1",json);
     if (azimut != null && elevation != null) {
-        POST2("http://192.168.1.60/api/v1/data/set/angles",azimut,elevation)
+        POST2("http://192.168.1.128/api/v1/data/set/angles",azimut,elevation)
     }
     return "0"
 }

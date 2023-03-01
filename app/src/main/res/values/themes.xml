@@ -2,8 +2,11 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.RotatorApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">#651FFF</item>
+        <item name="materialButtonStyle">@style/Widget.MyApp.ButtonLight</item>
     </style>
-
+    <style name="Widget.MyApp.ButtonLight" parent="@style/Widget.Material3.Button">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
     <style name="Theme.RotatorApp" parent="Base.Theme.RotatorApp" />
 </resources>

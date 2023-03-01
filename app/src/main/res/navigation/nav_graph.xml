@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/DataSet">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.leshe4ka.rotator.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first" >
+        android:id="@+id/DataSet"
+        android:name="com.leshe4ka.rotator.DataSet"
+        android:label="@string/data_set_label"
+        tools:layout="@layout/data_set">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_dataset_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
     <fragment
@@ -23,6 +23,6 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/DataSet" />
     </fragment>
 </navigation>
