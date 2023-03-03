@@ -3,8 +3,12 @@
     <style name="Base.Theme.RotatorApp" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">#FFFFFF</item>
         <item name="materialButtonStyle">@style/Widget.MyApp.ButtonDark</item>
+        <item name="floatingActionButtonStyle">@style/Widget.MyApp.FloatButtonDark</item>
     </style>
     <style name="Widget.MyApp.ButtonDark" parent="@style/Widget.Material3.Button.OutlinedButton">
         <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="Widget.MyApp.FloatButtonDark" parent="@style/Widget.Material3.FloatingActionButton.Primary">
+        <item name="android:backgroundTint">#1C1B20</item>
     </style>
 </resources>

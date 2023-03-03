@@ -1,16 +1,22 @@
 <resources>
     <string name="app_name">RotatorApp</string>
-    <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="data_set_label">Sporadic Rotator</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="settings_label">Settings</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
     <string name="azimuth">Азимут</string>
     <string name="elevation">Элевация</string>
     <string name="sendText">Отправить</string>
-    <string name="defaultNum">0</string>
+    <string name="host">Адрес</string>
+    <string name="defaulthost">192.168.4.1</string>
+    <string name="saveText">Сохранить</string>
+    <string name="latitude">Широта</string>
+    <string name="longitude">Долгота</string>
+    <string name="height">Высота</string>
+    <string name="sattext">Спутник</string>
+    <string name="hometext">Поворотка</string>
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
@@ -47,4 +53,20 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>

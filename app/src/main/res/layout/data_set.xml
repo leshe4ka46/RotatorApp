@@ -11,14 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp">
+
         <TextView
             android:id="@+id/textViewPreAzimuth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/azimuth"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textViewAzimuth"
@@ -26,8 +28,8 @@
             android:layout_height="wrap_content"
             android:text="0.0"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textViewPreAzimuth"
+            app:layout_constraintStart_toStartOf="@+id/textViewPreAzimuth"
             app:layout_constraintTop_toBottomOf="@+id/textViewPreAzimuth" />
 
         <TextView
@@ -35,9 +37,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/elevation"
-            app:layout_constraintTop_toBottomOf="@+id/textViewAzimuth"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textViewElevation"
@@ -45,29 +48,29 @@
             android:layout_height="wrap_content"
             android:text="0.0"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textViewPreElevation"
+            app:layout_constraintStart_toStartOf="@+id/textViewPreElevation"
             app:layout_constraintTop_toBottomOf="@+id/textViewPreElevation" />
 
-        <Button
+        <!--<Button
             android:id="@+id/button_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/next"
-            app:layout_constraintTop_toBottomOf="@+id/textViewElevation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-             />
+            app:layout_constraintTop_toBottomOf="@+id/textViewElevation" />-->
 
         <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/azimuthTextLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/azimuth"
-            app:layout_constraintTop_toBottomOf="@+id/button_first"
-            tools:layout_editor_absoluteX="48dp">
+            app:layout_constraintTop_toBottomOf="@+id/textViewElevation">
 
             <EditText
+
                 android:id="@+id/editTextAzimuth"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -94,6 +97,17 @@
                 android:inputType="numberDecimal|numberSigned" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/sattext"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/elevationTextLayout" />
+
         <Button
 
             android:id="@+id/sendAngles"
@@ -107,6 +121,178 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/elevationTextLayout" />
 
+
+        <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/sendAngles"
+            app:srcCompat="@drawable/near_me_black_24dp"
+            tools:layout_editor_absoluteX="322dp" />-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/SatLatitudeTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/latitude"
+            app:layout_constraintTop_toBottomOf="@+id/sendAngles"
+            tools:layout_editor_absoluteX="48dp">
+
+            <EditText
+                android:id="@+id/editTextSatLatitude"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:importantForAccessibility="no"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal|numberSigned" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/SatLongitudeTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/longitude"
+            app:layout_constraintTop_toBottomOf="@+id/SatLatitudeTextLayout"
+            tools:layout_editor_absoluteX="48dp">
+
+            <EditText
+                android:id="@+id/editTextSatLongitude"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:importantForAccessibility="no"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal|numberSigned" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/SatHeightTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:hint="@string/height"
+            app:layout_constraintTop_toBottomOf="@+id/SatLongitudeTextLayout">
+
+            <EditText
+                android:id="@+id/editTextSatHeight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:importantForAccessibility="no"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal|numberSigned" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/sendSatPos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginTop="4dp"
+            android:text="@string/sendText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.996"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SatHeightTextLayout" />
+
+        <!---->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/hometext"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SatHeightTextLayout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/HomeLatitudeTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/latitude"
+            app:layout_constraintTop_toBottomOf="@+id/sendSatPos"
+            tools:layout_editor_absoluteX="48dp">
+
+            <EditText
+                android:id="@+id/editTextHomeLatitude"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:importantForAccessibility="no"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal|numberSigned" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/HomeLongitudeTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/longitude"
+            app:layout_constraintTop_toBottomOf="@+id/HomeLatitudeTextLayout"
+            tools:layout_editor_absoluteX="48dp">
+
+            <EditText
+                android:id="@+id/editTextHomeLongitude"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:importantForAccessibility="no"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal|numberSigned" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/HomeHeightLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/HomeLongitudeTextLayout">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/HomeHeightTextLayout"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:hint="@string/height">
+
+                <EditText
+                    android:id="@+id/editTextHomeHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:importantForAccessibility="no"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal|numberSigned" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/getGPS"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|end"
+                android:layout_weight="1"
+                android:src="@drawable/baseline_location"
+                android:tint="#FFFFFF"
+                app:backgroundTint="#FFFFFF"
+                app:elevation="0dp"
+                app:iconTint="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="1" />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/sendHomePos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginTop="4dp"
+            android:text="@string/sendText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.996"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/HomeHeightLinearLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

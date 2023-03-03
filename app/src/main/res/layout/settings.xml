@@ -4,32 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondFragment">
+    tools:context=".Settings">
 
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:padding="16dp">
 
-    <Button
-        android:id="@+id/button_second"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/hostTextLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/previous"
-        app:layout_constraintTop_toTopOf="parent"
+        android:hint="@string/host"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/textview_second" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textview_second"
+      <EditText
+          android:id="@+id/editTextHost"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:ems="10"
+          android:importantForAccessibility="no"
+          android:importantForAutofill="no"
+          android:inputType="textUri" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+
+        android:id="@+id/saveHost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/lorem_ipsum"
-        app:layout_constraintTop_toBottomOf="@id/button_second"
+        android:layout_gravity="bottom|end"
+        android:layout_marginTop="4dp"
+        android:text="@string/saveText"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.996"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/hostTextLayout" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
