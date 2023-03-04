@@ -2,40 +2,6 @@ package com.leshe4ka.rotator
 
 import android.util.Log
 import android.view.View
-import org.json.JSONObject
-
-/*
-import org.apache.http.HttpResponse
-import org.apache.http.client.HttpClient
-import org.apache.http.client.methods.HttpPost
-import org.apache.http.entity.StringEntity
-import org.apache.http.impl.client.DefaultHttpClient
-
-import java.io.*
-import java.net.HttpURLConnection
-import java.net.URI
-import java.net.URL
-import java.nio.charset.StandardCharsets
-
-fun POST2(url: String?,data:String): String? {
-    //data.toByteArray()
-    Log.i("ROTATORLOG","0");
-    val url = URL(url)
-    Log.i("ROTATORLOG","1");
-    val connection = url.openConnection() as HttpURLConnection
-    Log.i("ROTATORLOG","2");
-    connection.setRequestMethod("POST")
-    connection.setRequestProperty("Content-Type", "application/json")
-    connection.setRequestProperty("Accept", "application/json")
-    connection.setRequestProperty("charset", "utf-8")
-    connection.setDoOutput(true)
-    connection.setInstanceFollowRedirects(false)
-    Log.i("ROTATORLOG","3");
-    DataOutputStream(connection.getOutputStream()).use { wr -> wr.write(data.toByteArray()) }
-    Log.i("ROTATORLOG","4");
-    return "0"
-}*/
-
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.Call
@@ -105,6 +71,7 @@ fun post_angles(azimut:String,elevation:String,view: View) {
             }
 
             override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+                Log.e("ROTATOR_APP",t.toString())
                 Snackbar.make(view,t.toString(),Snackbar.LENGTH_LONG).show()
             }
 
