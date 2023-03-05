@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.RotatorApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">#FFFFFF</item>
+    <style name="Base.Theme.RotatorApp" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">#9CD67D</item>
         <item name="materialButtonStyle">@style/Widget.MyApp.ButtonDark</item>
         <item name="floatingActionButtonStyle">@style/Widget.MyApp.FloatButtonDark</item>
     </style>

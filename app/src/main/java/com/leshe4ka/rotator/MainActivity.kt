@@ -5,10 +5,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.os.Handler
+import android.provider.Settings
 import android.text.Editable
-import android.view.Menu
 import android.view.View
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.WindowCompat
@@ -16,30 +16,31 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.google.android.gms.location.*
 import com.google.android.material.snackbar.Snackbar
 import com.leshe4ka.rotator.databinding.ActivityMainBinding
-import android.provider.Settings
+
 fun valid(str: Editable): Boolean {
-    var l_str =str.toString()
-    if (l_str!="" && l_str!="." && l_str!="null" && l_str!=null){
+    val lstr =str.toString()
+    if (lstr!="" && lstr!="." && lstr!="null"){
         return true
     }
     return false
 }
 
 val request = LocationRequest()
-private val toolbar: Toolbar? = null
+var handler = Handler()
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     lateinit var fusedLocationProvider: FusedLocationProviderClient
-
+    var runnable: Runnable? = null
+    var delay = 1000
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
         val view: View = findViewById(android.R.id.content)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        //handler.postDelayed(runnableCode,1000);
 
         setSupportActionBar(findViewById(R.id.toolbar))
         /*  top navigation text */
@@ -51,8 +52,6 @@ class MainActivity : AppCompatActivity() {
         binding.editTextElevation.setText("0");
         binding.sendAngles.setOnClickListener {
             if (valid(binding.editTextAzimuth.text) && valid(binding.editTextElevation.text)) {
-                binding.textViewAzimuth.text = binding.editTextAzimuth.text.toString()
-                binding.textViewElevation.text = binding.editTextElevation.text.toString()
                 post_angles(binding.editTextAzimuth.text.toString(),binding.editTextElevation.text.toString(),view)
             }
             else{
@@ -107,16 +106,20 @@ class MainActivity : AppCompatActivity() {
                 Snackbar.make(view,"Надо хоть что-то написать", Snackbar.LENGTH_LONG).setAction("Закрыть", { }).show()
             }
         }
+        binding.dorotateSwitch.setOnClickListener {
+            post_dorotate(binding.dorotateSwitch.isChecked)
 
-    }
-    private val locationListener: LocationListener = object : LocationListener {
-        override fun onLocationChanged(location: Location) {
-            //thetext.text = ("" + location.longitude + ":" + location.latitude)
         }
     }
-override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+    override fun onResume() {
+        handler.postDelayed(Runnable {
+            handler.postDelayed(runnable!!, delay.toLong())
+            get_data(binding)
+        }.also { runnable = it }, delay.toLong())
+        super.onResume()
+    }
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable!!)
     }
 }
