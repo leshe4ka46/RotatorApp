@@ -16,5 +16,7 @@
     <string name="delta">Смещение угла</string>
     <string name="dorotate">Доворот до точной остановки</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="reset">Сброс угла</string>
+    <string name="exit">Выход</string>
 
 </resources>

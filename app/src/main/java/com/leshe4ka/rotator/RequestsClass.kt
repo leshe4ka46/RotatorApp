@@ -1,8 +1,9 @@
 package com.leshe4ka.rotator
-
 import android.util.Log
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.leshe4ka.rotator.databinding.ActivityMainBinding
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -15,13 +16,14 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 
-var host="http://192.168.1.128/"
+var host="http://192.168.4.1"
 object ServiceBuilder {
     private val client = OkHttpClient.Builder().build()
-
+    var gsonBuilder: GsonBuilder = GsonBuilder().setLenient()
+    var gson: Gson = gsonBuilder.create()
     private val retrofit = Retrofit.Builder()
         .baseUrl(host)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .client(client)
         .build()
 
@@ -63,6 +65,10 @@ interface ApiInterfaceDorotateSet {
     @POST("api/v1/data/set/dorotate")
     fun sendReq(@Body requestModel: RequestModelDorotate) : Call<ResponseModel>
 }
+interface ApiInterfaceResetSet{
+    @POST("api/v1/reset/as5600/")
+    fun sendReq(@Body requestModel: RequestModelDorotate) : Call<ResponseModel>
+}
 interface ApiInterfaceCoordsGet {
     @GET("api/v1/data/get/angles")
     fun getData() : Call<ResponseAngles>
@@ -91,7 +97,7 @@ fun post_angles(azimut:String,elevation:String,view: View) {
             }
 
             override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
-                Log.e("ROTATOR_APP",t.toString())
+                Log.e("ROTATOR_APP1",t.toString())
                 Snackbar.make(view,t.toString(),Snackbar.LENGTH_LONG).show()
             }
 
@@ -186,6 +192,27 @@ fun Boolean.toInt() = if (this) 1 else 0
 fun post_dorotate(dorotate:Boolean) {
     var response = ServiceBuilder.buildService(ApiInterfaceDorotateSet::class.java)
     val requestModel = RequestModelDorotate("SATAPPSP",dorotate.toInt())
+    response.sendReq(requestModel).enqueue(
+        object : Callback<ResponseModel> {
+            override fun onResponse(
+                call: Call<ResponseModel>,
+                response: Response<ResponseModel>
+            ) {
+                //Snackbar.make(view,response.message().toString(),Snackbar.LENGTH_LONG).show()
+            }
+
+            override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+                Log.e("ROTATOR_APP",t.toString());
+            }
+
+        }
+    )
+}
+
+fun post_reset() {
+
+    var response = ServiceBuilder.buildService(ApiInterfaceResetSet::class.java)
+    val requestModel = RequestModelDorotate("SATAPPSP",0)
     response.sendReq(requestModel).enqueue(
         object : Callback<ResponseModel> {
             override fun onResponse(

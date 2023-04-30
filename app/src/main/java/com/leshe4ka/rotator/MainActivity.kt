@@ -1,6 +1,7 @@
 package com.leshe4ka.rotator
 
 import android.Manifest
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -8,6 +9,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.text.Editable
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -16,6 +19,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.google.android.gms.location.*
 import com.google.android.material.snackbar.Snackbar
 import com.leshe4ka.rotator.databinding.ActivityMainBinding
+
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+
 
 fun valid(str: Editable): Boolean {
     val lstr =str.toString()
@@ -27,6 +34,7 @@ fun valid(str: Editable): Boolean {
 
 val request = LocationRequest()
 var handler = Handler()
+var reset_counter:Int=0
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -42,7 +50,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         //handler.postDelayed(runnableCode,1000);
 
-        setSupportActionBar(findViewById(R.id.toolbar))
+        //setSupportActionBar(findViewById(R.id.materialtoolbar))
+        setSupportActionBar(binding.materialtoolbar)
         /*  top navigation text */
         /*val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
@@ -110,6 +119,34 @@ class MainActivity : AppCompatActivity() {
             post_dorotate(binding.dorotateSwitch.isChecked)
 
         }
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.main_menu,menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        if(item.itemId ==R.id.mainMenuResetAngles){
+            Snackbar.make(this.findViewById(R.id.scroll),"Точно сбросить углы?", Snackbar.LENGTH_LONG).setAction("Да") { post_reset() }
+                .show()
+            return true
+        }
+        if(item.itemId ==R.id.mainMenuExit){
+            finish();
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+
+        /*return when (item.itemId) {
+            R.id.action_settings -> true
+            else -> super.onOptionsItemSelected(item)
+        }*/
     }
     override fun onResume() {
         handler.postDelayed(Runnable {

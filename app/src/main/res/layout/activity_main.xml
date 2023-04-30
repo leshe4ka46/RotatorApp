@@ -16,12 +16,13 @@
         >
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/materialtoolbar"
             android:layout_width = "match_parent"
-            android:layout_height = "?attr/actionBarSize" />
+            android:layout_height = "?attr/actionBarSize"/>
 
   </com.google.android.material.appbar.AppBarLayout>
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_marginTop="65dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -310,13 +311,16 @@
         <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/dorotateSwitch"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/dorotate"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sendHomePos" />
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
   </androidx.coordinatorlayout.widget.CoordinatorLayout>
