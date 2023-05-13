@@ -1,7 +1,7 @@
 package com.leshe4ka.rotator
 
+
 import android.Manifest
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -19,10 +19,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.google.android.gms.location.*
 import com.google.android.material.snackbar.Snackbar
 import com.leshe4ka.rotator.databinding.ActivityMainBinding
-
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-
+import com.leshe4ka.rotator.JoyActivity
 
 fun valid(str: Editable): Boolean {
     val lstr =str.toString()
@@ -134,6 +131,12 @@ class MainActivity : AppCompatActivity() {
         if(item.itemId ==R.id.mainMenuResetAngles){
             Snackbar.make(this.findViewById(R.id.scroll),"Точно сбросить углы?", Snackbar.LENGTH_LONG).setAction("Да") { post_reset() }
                 .show()
+            return true
+        }
+        if(item.itemId ==R.id.mainMenuOpenJoystick){
+            val intent = Intent()
+            intent.setClass(this, JoyActivity::class.java)
+            startActivity(intent)
             return true
         }
         if(item.itemId ==R.id.mainMenuExit){

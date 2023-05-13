@@ -8,6 +8,10 @@
         android:id="@+id/mainMenuResetAngles"/>
 
     <item
+        android:title="@string/openJoystick"
+        android:id="@+id/mainMenuOpenJoystick"/>
+
+    <item
         android:title="@string/exit"
         android:id="@+id/mainMenuExit"/>
 </menu>

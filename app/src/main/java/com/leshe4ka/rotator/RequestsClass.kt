@@ -46,6 +46,11 @@ data class RequestModelDorotate(
     val key: String,
     val value: Int
 )
+data class RequestModelJoystick(
+    val key: String,
+    val axis: Int,
+    var angle: Float
+)
 data class ResponseModel(
     val message: String
 )
@@ -65,6 +70,11 @@ interface ApiInterfaceDorotateSet {
     @POST("api/v1/data/set/dorotate")
     fun sendReq(@Body requestModel: RequestModelDorotate) : Call<ResponseModel>
 }
+
+interface ApiInterfaceJoystickSet {
+    @POST("/api/v1/data/set/delta")
+    fun sendReq(@Body requestModel: RequestModelJoystick) : Call<ResponseModel>
+}
 interface ApiInterfaceResetSet{
     @POST("api/v1/reset/as5600/")
     fun sendReq(@Body requestModel: RequestModelDorotate) : Call<ResponseModel>
@@ -73,6 +83,8 @@ interface ApiInterfaceCoordsGet {
     @GET("api/v1/data/get/angles")
     fun getData() : Call<ResponseAngles>
 }
+
+
 data class ResponseAngles(
     val azimut: Float,
     val elevation: Float,
@@ -97,7 +109,7 @@ fun post_angles(azimut:String,elevation:String,view: View) {
             }
 
             override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
-                Log.e("ROTATOR_APP1",t.toString())
+                Log.e("ROTATOR_APP",t.toString())
                 Snackbar.make(view,t.toString(),Snackbar.LENGTH_LONG).show()
             }
 
@@ -119,6 +131,7 @@ fun post_coords_sat(latitude:String,langitude:String,height: String,view: View) 
 
             override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
                 Snackbar.make(view,t.toString(),Snackbar.LENGTH_LONG).show()
+                Log.e("ROTATOR_APP",t.toString())
             }
 
         }
@@ -139,6 +152,7 @@ fun post_coords_home(latitude:String,langitude:String,height: String,view: View)
 
             override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
                 Snackbar.make(view,t.toString(),Snackbar.LENGTH_LONG).show()
+                Log.e("ROTATOR_APP",t.toString())
             }
 
         }
@@ -167,27 +181,6 @@ fun get_data(binding: ActivityMainBinding) {
 
 }
 
-
-
-/*
-//not async
-fun get_data():Array<String> {
-    try {
-        val policy = ThreadPolicy.Builder().permitAll().build()
-        StrictMode.setThreadPolicy(policy)
-        val connection = URL(host + "api/v1/data/get/angles").openConnection() as HttpURLConnection
-        val data = connection.inputStream.bufferedReader().readText()
-        var resp: ResponseAngles = Gson().fromJson(data, ResponseAngles::class.java)
-        return arrayOf(resp.azimut.toString(), resp.elevation.toString(),resp.dorotate_enabled.toString())
-    }
-    catch (e:Exception) {
-        Log.e("ROTATOR_APP",e.toString());
-        return arrayOf("-1","-1","0")
-    }
-
-}
-
- */
 fun Boolean.toInt() = if (this) 1 else 0
 fun post_dorotate(dorotate:Boolean) {
     var response = ServiceBuilder.buildService(ApiInterfaceDorotateSet::class.java)
@@ -224,6 +217,24 @@ fun post_reset() {
 
             override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
                 Log.e("ROTATOR_APP",t.toString());
+            }
+
+        }
+    )
+}
+
+fun post_joystick(axis:Int,angle:Float) {
+    var response = ServiceBuilder.buildService(ApiInterfaceJoystickSet::class.java)
+    val requestModel = RequestModelJoystick("SATAPPSP",axis,angle)
+    response.sendReq(requestModel).enqueue(
+        object : Callback<ResponseModel> {
+            override fun onResponse(
+                call: Call<ResponseModel>,
+                response: Response<ResponseModel>
+            ) {
+            }
+            override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+                Log.e("ROTATOR_APP",t.toString())
             }
 
         }

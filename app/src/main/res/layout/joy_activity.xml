@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".JoyActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/JoyLayout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        >
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialtoolbar_joy"
+            android:layout_width = "match_parent"
+            android:layout_height = "?attr/actionBarSize"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/upButton"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center"
+        android:layout_marginBottom="105dp"
+        android:drawableLeft="@drawable/arrow_up" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/downButton"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center"
+        android:layout_marginTop="105dp"
+        android:drawableLeft="@drawable/arrow_down" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rightButton"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center"
+        android:layout_marginLeft="155dp"
+        android:drawableLeft="@drawable/arrow_right" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/leftButton"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center"
+        android:layout_marginRight="155dp"
+        android:drawableLeft="@drawable/arrow_left" />
+
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/angle_toggle_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:selectionRequired="true"
+        app:singleSelection="true"
+        android:layout_gravity="center|center"
+        android:layout_marginTop="300dp"
+        app:checkedButton="@id/c_button"
+        >
+
+    <Button
+        android:id="@+id/a_button"
+        style="?attr/materialIconButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="0.1" />
+
+    <Button
+        android:id="@+id/b_button"
+        style="?attr/materialIconButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="0.25" />
+
+    <Button
+        android:id="@+id/c_button"
+        style="?attr/materialIconButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="1" />
+
+    <Button
+        android:id="@+id/d_button"
+        style="?attr/materialIconButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="5" />
+
+    <Button
+        android:id="@+id/e_button"
+        style="?attr/materialIconButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="10" />
+
+    <Button
+        android:id="@+id/f_button"
+        style="?attr/materialIconButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="25" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:text="@string/back"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="15dp"/>
+
+
+
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>

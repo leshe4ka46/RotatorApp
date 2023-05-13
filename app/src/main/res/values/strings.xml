@@ -17,6 +17,8 @@
     <string name="dorotate">Доворот до точной остановки</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="reset">Сброс угла</string>
+    <string name="openJoystick">Джойстик</string>
     <string name="exit">Выход</string>
+    <string name="back">Назад</string>
 
 </resources>
