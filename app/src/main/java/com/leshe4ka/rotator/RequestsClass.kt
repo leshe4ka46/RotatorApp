@@ -31,6 +31,21 @@ object ServiceBuilder {
         return retrofit.create(service)
     }
 }
+
+object AltitudeBuilder {
+    private val client = OkHttpClient.Builder().build()
+    var gsonBuilder: GsonBuilder = GsonBuilder().setLenient()
+    var gson: Gson = gsonBuilder.create()
+    private val retrofit = Retrofit.Builder()
+        .baseUrl("https://api.opentopodata.org")
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .client(client)
+        .build()
+
+    fun<T> buildService(service: Class<T>): T{
+        return retrofit.create(service)
+    }
+}
 data class RequestModelAngles(
     val key: String,
     val azimut: Float,
@@ -51,8 +66,17 @@ data class RequestModelJoystick(
     val axis: Int,
     var angle: Float
 )
+data class RequestModelAltitude(
+    val locations: String
+)
 data class ResponseModel(
     val message: String
+)
+data class ResponseResult(
+    val elevation: Float
+)
+data class ResponseAltitude(
+    val results: Array<ResponseResult>
 )
 interface ApiInterfaceAngles {
     @POST("api/v1/data/set/angles")
@@ -83,7 +107,10 @@ interface ApiInterfaceCoordsGet {
     @GET("api/v1/data/get/angles")
     fun getData() : Call<ResponseAngles>
 }
-
+interface ApiInterfaceGetAltitude {
+    @POST("v1/mapzen")
+    fun sendReq(@Body requestModel: RequestModelAltitude) : Call<ResponseAltitude>
+}
 
 data class ResponseAngles(
     val azimut: Float,
@@ -95,7 +122,6 @@ data class ResponseAngles(
     val delta_enabled: Int,
     val dorotate_enabled: Int
 )
-
 fun post_angles(azimut:String,elevation:String,view: View) {
     val response = ServiceBuilder.buildService(ApiInterfaceAngles::class.java)
     val requestModel = RequestModelAngles("SATAPPSP",azimut.toFloat(),elevation.toFloat())
@@ -235,6 +261,31 @@ fun post_joystick(axis:Int,angle:Float) {
             }
             override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
                 Log.e("ROTATOR_APP",t.toString())
+            }
+
+        }
+    )
+}
+
+fun get_altitude(binding: ActivityMainBinding,view: View,latitude: String,longitude: String) {
+    var response = AltitudeBuilder.buildService(ApiInterfaceGetAltitude::class.java)
+    val requestModel = RequestModelAltitude(latitude+","+longitude)
+    response.sendReq(requestModel).enqueue(
+        object : Callback<ResponseAltitude> {
+            override fun onResponse(
+                call: Call<ResponseAltitude>,
+                response: Response<ResponseAltitude>
+            ) {
+                if (response.code() == 200) {
+                    val dataResponse = response.body()!!
+                    binding.editTextHomeHeight.setText(dataResponse.results.first().elevation.toString())
+                }
+            }
+            override fun onFailure(call: Call<ResponseAltitude>, t: Throwable) {
+                Log.e("ROTATOR_APP",t.toString())
+                if ("Unable to resolve" in t.message.toString()){
+                    Snackbar.make(view,"Нет подключения к интернету для получения высоты над уровнем моря",Snackbar.LENGTH_LONG).show()
+                }
             }
 
         }

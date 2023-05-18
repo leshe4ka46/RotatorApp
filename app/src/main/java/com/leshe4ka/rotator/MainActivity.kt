@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity() {
                     .addOnSuccessListener { location: Location? ->
                         binding.editTextHomeLatitude.setText(location?.latitude.toString())
                         binding.editTextHomeLongitude.setText(location?.longitude.toString())
+                        get_altitude(binding,view,location?.latitude.toString(),location?.longitude.toString())
                         if(location?.hashCode()==null){
                             Snackbar.make(view,"GPS выключен, нет данных", Snackbar.LENGTH_LONG).setAction("Открыть настройки") {
                                 startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
@@ -82,6 +83,7 @@ class MainActivity : AppCompatActivity() {
                                     val location: Location? = locationResult.lastLocation
                                     binding.editTextHomeLatitude.setText(location?.latitude.toString())
                                     binding.editTextHomeLongitude.setText(location?.longitude.toString())
+                                    get_altitude(binding,view,location?.latitude.toString(),location?.longitude.toString())
                                 }
                             }, null)
 
