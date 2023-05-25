@@ -1,10 +1,12 @@
 package com.leshe4ka.rotator
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.leshe4ka.rotator.databinding.ActivityMainBinding
+import com.leshe4ka.rotator.databinding.JoyActivityBinding
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -64,7 +66,8 @@ data class RequestModelDorotate(
 data class RequestModelJoystick(
     val key: String,
     val axis: Int,
-    var angle: Float
+    var angle: Float,
+    var reset: Int
 )
 data class RequestModelAltitude(
     val locations: String
@@ -107,6 +110,10 @@ interface ApiInterfaceCoordsGet {
     @GET("api/v1/data/get/angles")
     fun getData() : Call<ResponseAngles>
 }
+interface ApiInterfaceJoyCoordsGet {
+    @GET("/api/v1/data/get/joyangles")
+    fun getData() : Call<ResponseAnglesJoy>
+}
 interface ApiInterfaceGetAltitude {
     @POST("v1/mapzen")
     fun sendReq(@Body requestModel: RequestModelAltitude) : Call<ResponseAltitude>
@@ -121,6 +128,12 @@ data class ResponseAngles(
     val is_ready: Int,
     val delta_enabled: Int,
     val dorotate_enabled: Int
+)
+data class ResponseAnglesJoy(
+    val azimut: Float,
+    val elevation: Float,
+    val deltajoyazimut: Float,
+    val deltajoyelevation: Float
 )
 fun post_angles(azimut:String,elevation:String,view: View) {
     val response = ServiceBuilder.buildService(ApiInterfaceAngles::class.java)
@@ -196,15 +209,13 @@ fun get_data(binding: ActivityMainBinding) {
         override fun onResponse(call: Call<ResponseAngles>, response: Response<ResponseAngles>) {
             if (response.code() == 200) {
                 val dataResponse = response.body()!!
-                binding.textViewAzimuth.text=dataResponse.azimut.toString()
-                binding.textViewElevation.text=dataResponse.elevation.toString()
+                binding.textViewAzimuth.text="%.4f".format(dataResponse.azimut)
+                binding.textViewElevation.text="%.4f".format(dataResponse.elevation)
                 binding.dorotateSwitch.isChecked=(dataResponse.dorotate_enabled==1)
             }
         }
         override fun onFailure(call: Call<ResponseAngles>, t: Throwable) {  Log.e("ROATATOR_APP", t.toString())          }
     })
-
-
 }
 
 fun Boolean.toInt() = if (this) 1 else 0
@@ -249,9 +260,9 @@ fun post_reset() {
     )
 }
 
-fun post_joystick(axis:Int,angle:Float) {
+fun post_joystick(axis:Int,angle:Float,reset:Int) {
     var response = ServiceBuilder.buildService(ApiInterfaceJoystickSet::class.java)
-    val requestModel = RequestModelJoystick("SATAPPSP",axis,angle)
+    val requestModel = RequestModelJoystick("SATAPPSP",axis,angle,reset)
     response.sendReq(requestModel).enqueue(
         object : Callback<ResponseModel> {
             override fun onResponse(
@@ -290,4 +301,28 @@ fun get_altitude(binding: ActivityMainBinding,view: View,latitude: String,longit
 
         }
     )
+}
+
+fun get_data_joystick(binding: JoyActivityBinding) {
+    val retrofit = Retrofit.Builder()
+        .baseUrl(host)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+    val service = retrofit.create(ApiInterfaceJoyCoordsGet::class.java)
+    val call = service.getData()
+    call.enqueue(object : Callback<ResponseAnglesJoy> {
+        @SuppressLint("SetTextI18n")
+        override fun onResponse(call: Call<ResponseAnglesJoy>, response: Response<ResponseAnglesJoy>) {
+            if (response.code() == 200) {
+                val dataResponse = response.body()!!
+                binding.textViewJoyAzimuth.text="%.4f".format(dataResponse.azimut)
+                binding.textViewJoyElevation.text="%.4f".format(dataResponse.elevation)
+                binding.textViewJoyAzimuthCorrect.text="%.4f".format(dataResponse.azimut+dataResponse.deltajoyazimut)
+                binding.textViewJoyElevationCorrect.text="%.4f".format(dataResponse.elevation+dataResponse.deltajoyelevation)
+            }
+        }
+        override fun onFailure(call: Call<ResponseAnglesJoy>, t: Throwable) {
+            Log.e("ROATATOR_APP", t.toString())
+        }
+    })
 }

@@ -7,6 +7,7 @@
     </style>
     <style name="Widget.MyApp.ButtonDark" parent="@style/Widget.Material3.Button.OutlinedButton">
         <item name="android:textColor">#FFFFFF</item>
+
     </style>
     <style name="Widget.MyApp.FloatButtonDark" parent="@style/Widget.Material3.FloatingActionButton.Primary">
         <item name="android:backgroundTint">#1C1B20</item>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,119 +9,244 @@
     android:fitsSystemWindows="true"
     tools:context=".JoyActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/JoyLayout"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
-        >
+        android:layout_height="match_parent"
+        android:layout_marginTop="65dp">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/materialtoolbar_joy"
-            android:layout_width = "match_parent"
-            android:layout_height = "?attr/actionBarSize"/>
-    </com.google.android.material.appbar.AppBarLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/textViewJoyAzimuthText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/azimuth"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/materialDivider" />
+
+        <TextView
+            android:id="@+id/textViewJoyAzimuth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewJoyAzimuthText"
+            app:layout_constraintStart_toStartOf="@+id/textViewJoyAzimuthText"
+            app:layout_constraintTop_toBottomOf="@+id/textViewJoyAzimuthText" />
+
+        <TextView
+            android:id="@+id/textViewJoyAzimuthCorrectText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/azimuth"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/materialDivider" />
+
+        <TextView
+            android:id="@+id/textViewJoyAzimuthCorrect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewJoyAzimuthCorrectText"
+            app:layout_constraintStart_toStartOf="@+id/textViewJoyAzimuthCorrectText"
+            app:layout_constraintTop_toBottomOf="@+id/textViewJoyAzimuthCorrectText" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/materialDivider"
+            android:layout_width="1dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center|top"
+            app:dividerInsetEnd="16dp"
+            app:dividerInsetStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/elevation"
+            android:textSize="22sp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewJoyAzimuth"
+            app:layout_constraintStart_toStartOf="@+id/textViewJoyAzimuth"
+            app:layout_constraintTop_toBottomOf="@+id/textViewJoyAzimuth" />
+
+
+        <TextView
+            android:id="@+id/textViewJoyElevation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:text="@string/elevation"
+            android:layout_marginTop="10dp"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewJoyAzimuthCorrect"
+            app:layout_constraintStart_toStartOf="@+id/textViewJoyAzimuthCorrect"
+            app:layout_constraintTop_toBottomOf="@+id/textViewJoyAzimuthCorrect" />
+
+        <TextView
+            android:id="@+id/textViewJoyElevationCorrect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/upButton"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:drawableLeft="@drawable/arrow_up"
+            app:layout_constraintTop_toBottomOf="@+id/materialDivider"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/downButton"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+
+                android:drawableLeft="@drawable/arrow_down"
+                app:layout_constraintTop_toBottomOf="@+id/leftButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/rightButton"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+
+                android:drawableLeft="@drawable/arrow_right"
+                app:layout_constraintTop_toBottomOf="@+id/upButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.75"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/leftButton"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.25"
+                app:layout_constraintStart_toStartOf="parent"
+                android:drawableLeft="@drawable/arrow_left"
+
+                app:layout_constraintTop_toBottomOf="@+id/upButton" />
+
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/angle_toggle_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:checkedButton="@id/c_button"
+                app:layout_constraintTop_toBottomOf="@+id/downButton"
+                android:layout_marginTop="40dp"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <Button
+                    android:id="@+id/a_button"
+                    style="?attr/materialIconButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0.1" />
+
+                <Button
+                    android:id="@+id/b_button"
+                    style="?attr/materialIconButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0.25" />
+
+                <Button
+                    android:id="@+id/c_button"
+                    style="?attr/materialIconButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="1" />
+
+                <Button
+                    android:id="@+id/d_button"
+                    style="?attr/materialIconButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="5" />
+
+                <Button
+                    android:id="@+id/e_button"
+                    style="?attr/materialIconButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="10" />
+
+                <Button
+                    android:id="@+id/f_button"
+                    style="?attr/materialIconButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="25" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/upButton"
-        android:layout_width="88dp"
+        android:id="@+id/homeButton"
+        android:layout_width="85dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|center"
-        android:layout_marginBottom="105dp"
-        android:drawableLeft="@drawable/arrow_up" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/downButton"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|center"
-        android:layout_marginTop="105dp"
-        android:drawableLeft="@drawable/arrow_down" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/rightButton"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|center"
-        android:layout_marginLeft="155dp"
-        android:drawableLeft="@drawable/arrow_right" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/leftButton"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|center"
-        android:layout_marginRight="155dp"
-        android:drawableLeft="@drawable/arrow_left" />
-
-
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/angle_toggle_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:selectionRequired="true"
-        app:singleSelection="true"
-        android:layout_gravity="center|center"
-        android:layout_marginTop="300dp"
-        app:checkedButton="@id/c_button"
-        >
-
-    <Button
-        android:id="@+id/a_button"
-        style="?attr/materialIconButtonOutlinedStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="0.1" />
-
-    <Button
-        android:id="@+id/b_button"
-        style="?attr/materialIconButtonOutlinedStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="0.25" />
-
-    <Button
-        android:id="@+id/c_button"
-        style="?attr/materialIconButtonOutlinedStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="1" />
-
-    <Button
-        android:id="@+id/d_button"
-        style="?attr/materialIconButtonOutlinedStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="5" />
-
-    <Button
-        android:id="@+id/e_button"
-        style="?attr/materialIconButtonOutlinedStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="10" />
-
-    <Button
-        android:id="@+id/f_button"
-        style="?attr/materialIconButtonOutlinedStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="25" />
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
+        android:drawableLeft="@drawable/home"
+        android:layout_gravity="bottom|start"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="15dp"
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
+        android:layout_width="95dp"
+        android:layout_height="57dp"
         android:text="@string/back"
+        android:textSize="15sp"
+        android:layout_gravity="bottom|end"
         android:layout_marginBottom="15dp"
-        android:layout_marginStart="15dp"/>
-
-
-
-  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:layout_marginEnd="15dp"
+        />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -147,11 +147,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
-
-        /*return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }*/
     }
     override fun onResume() {
         handler.postDelayed(Runnable {
