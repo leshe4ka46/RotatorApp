@@ -1,19 +1,15 @@
 <resources>
     <string name="app_name">RotatorApp</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="data_set_label">Sporadic Rotator</string>
     <string name="azimuth">Азимут</string>
     <string name="elevation">Элевация</string>
     <string name="sendText">Отправить</string>
     <string name="host">Адрес</string>
-    <string name="defaulthost">192.168.4.1</string>
     <string name="saveText">Сохранить</string>
     <string name="latitude">Широта</string>
     <string name="longitude">Долгота</string>
     <string name="height">Высота</string>
     <string name="sattext">Спутник</string>
     <string name="hometext">Поворотка</string>
-    <string name="delta">Смещение угла</string>
     <string name="dorotate">Доворот до точной остановки</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="reset">Сброс угла</string>

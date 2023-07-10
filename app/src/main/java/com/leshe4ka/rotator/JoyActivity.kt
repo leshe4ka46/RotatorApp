@@ -14,7 +14,7 @@ class JoyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
-        val view: View = findViewById(android.R.id.content)
+        //val view: View = findViewById(android.R.id.content)
         binding = JoyActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
